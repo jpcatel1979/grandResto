@@ -1,0 +1,58 @@
+<h1>Listes des tables de la caleche</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Numeros</th>
+      <th>Couverts</th>
+      <th>Coordonées X</th>
+      <th>Coordonées Y</th>
+      <th>Disponible</th>
+      <th>Status<th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(var i=0; i<tables.length; i++) {
+  %><tr>
+      <td><%= tables[i].getNumeros()%></td>
+      <td><%= tables[i].getNbPlace ()%></td>
+      <td><%= tables[i].getX ()%></td>
+      <td><%= tables[i].getY()%></td>
+      <td><%= tables[i].isDisponible()%></td>
+  
+
+      <%if (tables[i].isDisponible()) { %>
+			<td><a href="/reserver/<%=tables[i].getNumeros()%>">reserver la table</a></td>
+      <% } %>
+
+      <%if (!tables[i].isDisponible()) { %>
+			<td><a href="" onclick="terminerReservation(<%= tables[i].getNumeros()%>)">terminer reservation</a></td>
+      <% } %>
+  </tr>
+  
+  
+  
+  
+  <%  
+ }%>
+  </tbody>
+
+
+</table>
+<script>
+function terminerReservation(id){
+  var url = 'http://localhost:8085/reserver/'+id;
+var xhr = new XMLHttpRequest();
+xhr.open("PUT", url, true);
+
+//Send the proper header information along with the request
+xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+xhr.onreadystatechange = function() {//Call a function when the state changes.
+    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+        console.log('coucou');
+    }
+}
+xhr.send('put'); 
+}
+</script>
