@@ -4,7 +4,7 @@ class Client {
     }
 
     getNom() {
-        return nom;
+        return this.nom;
     }
 
     setNom(nom) {
