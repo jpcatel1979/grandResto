@@ -1,4 +1,4 @@
-class Reservation {
+module.exports = class Reservation {
     constructor(numeros, table, client) {
         this.numeros = numeros;
         this.table = table;
@@ -6,15 +6,15 @@ class Reservation {
     }
 
     getNumeros() {
-        return numeros;
+        return this.numeros;
     }
 
     getTable() {
-        return table;
+        return this.table;
     }
 
     getClient() {
-        return client;
+        return this.client;
     }
 
     setNumeros(numeros) {
@@ -29,5 +29,3 @@ class Reservation {
         this.client = client;
     }
 }
-
-module.export = Reservation;

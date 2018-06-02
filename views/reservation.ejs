@@ -1,45 +1,77 @@
 <h1>Reservation</h1>
 <!-- faire la reservation-->
-  <form name="form" onsubmit=valider()>
-    <label>Nom : </label>
-    <input type="text" name="nom" id="client">
-    <input type="submit" value="envoyer">
-  </form> 
+<form name="form" method="POST" action="/reservation/">
+  <label>Nom : </label>
+  <input type="text" name="nom" id="nom">
+  <select name="numeros" id="numeros">
+    <% for(var i=0; i<tables.length; i++) {
+        %>
+      <option value="<%= tables[i].getNumeros()%>">
+        <%= tables[i].getNumeros()%>
+      </option>
+      <% } %>
+  </select>
+  <input type="submit" value="envoyer">
+</form>
 
 <!-- liste des reservations-->
+<h1>Listes des reservations à ce jour</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Numeros Reservation</th>
+      <th>Numeros de Table</th>
+      <th>Client</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(var i=0; i<lstresa.length; i++) {
+  %>
+      <tr>
+        <td>
+          <%= lstresa[i].getNumeros()%>
+        </td>
+        <td>
+          <%= lstresa[i].getTable ()%>
+        </td>
+        <td>
+          <%= lstresa[i].getClient()%>
+        </td>
+      </tr>
+      <%  
+ }%>
+  </tbody>
+</table>
+
 
 
 <script>
-function supprimer(id){
-  var url = 'http://localhost:8085/table/'+id;
-var xhr = new XMLHttpRequest();
-xhr.open("PUT", url, true);
 
-//Send the proper header information along with the request
-xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xhr.onreadystatechange = function() {//Call a function when the state changes.
-    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-        console.log('reservation');
-    }
-}
-xhr.send('put'); 
-}
 
-function valider(){
+  function valider() {/*
   var url = 'http://localhost:8085/reservation/';
   var nom = document.form.nom.value
-  
+  var table = document.form.numeros.value
+  //var params = "nom="+nom+"&numeros="+table
+  var params = {
+  a: 1, 
+  b: 2,
+  c: 3
+}
   var xhr = new XMLHttpRequest();
+  alert (params)
   xhr.open("POST", url, true);
 
   //Send the proper header information along with the request
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
   xhr.onreadystatechange = function() {//Call a function when the state changes.
       if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
           console.log('reservation');
       }
   }
-  xhr.send('post'); 
-}
+  xhr.send(params);*/
+    return document.form.nom.value != "";
+  }
 
 </script>
